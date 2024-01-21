@@ -28,6 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.MessageRtxt = new System.Windows.Forms.RichTextBox();
             this.SendMessageRTxt = new System.Windows.Forms.RichTextBox();
@@ -36,10 +38,19 @@
             this.label1 = new System.Windows.Forms.Label();
             this.MenuBtn = new System.Windows.Forms.Button();
             this.RefreshListBox = new System.Windows.Forms.Button();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // statusStrip1
             // 
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel1,
+            this.toolStripStatusLabel2,
+            this.toolStripStatusLabel3});
             this.statusStrip1.Location = new System.Drawing.Point(0, 424);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(713, 22);
@@ -49,6 +60,7 @@
             // 
             // MessageRtxt
             // 
+            this.MessageRtxt.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.MessageRtxt.Location = new System.Drawing.Point(2, 1);
             this.MessageRtxt.Name = "MessageRtxt";
             this.MessageRtxt.ReadOnly = true;
@@ -65,9 +77,8 @@
             this.SendMessageRTxt.Name = "SendMessageRTxt";
             this.SendMessageRTxt.Size = new System.Drawing.Size(497, 32);
             this.SendMessageRTxt.TabIndex = 2;
-            this.SendMessageRTxt.Text = "在这里输入消息";
+            this.SendMessageRTxt.Text = "";
             this.SendMessageRTxt.KeyDown += new System.Windows.Forms.KeyEventHandler(this.SendMessageRTxt_KeyDown);
-            this.SendMessageRTxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.SendMessageRTxt_KeyPress);
             // 
             // SendMessageBtn
             // 
@@ -105,6 +116,7 @@
             this.MenuBtn.TabIndex = 6;
             this.MenuBtn.Text = "菜单";
             this.MenuBtn.UseVisualStyleBackColor = true;
+            this.MenuBtn.Click += new System.EventHandler(this.MenuBtn_Click);
             // 
             // RefreshListBox
             // 
@@ -115,6 +127,24 @@
             this.RefreshListBox.Text = "刷新";
             this.RefreshListBox.UseVisualStyleBackColor = true;
             this.RefreshListBox.Click += new System.EventHandler(this.RefreshListBox_Click);
+            // 
+            // toolStripStatusLabel1
+            // 
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(131, 17);
+            this.toolStripStatusLabel1.Text = "toolStripStatusLabel1";
+            // 
+            // toolStripStatusLabel2
+            // 
+            this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
+            this.toolStripStatusLabel2.Size = new System.Drawing.Size(11, 17);
+            this.toolStripStatusLabel2.Text = "|";
+            // 
+            // toolStripStatusLabel3
+            // 
+            this.toolStripStatusLabel3.Name = "toolStripStatusLabel3";
+            this.toolStripStatusLabel3.Size = new System.Drawing.Size(131, 17);
+            this.toolStripStatusLabel3.Text = "toolStripStatusLabel3";
             // 
             // MainForm
             // 
@@ -131,12 +161,18 @@
             this.Controls.Add(this.MessageRtxt);
             this.Controls.Add(this.statusStrip1);
             this.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4);
+            this.MaximizeBox = false;
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "MainForm";
+            this.Text = "聊天";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.Load += new System.EventHandler(this.MainForm_Load);
+            this.Shown += new System.EventHandler(this.MainForm_Shown);
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -152,5 +188,9 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button MenuBtn;
         private System.Windows.Forms.Button RefreshListBox;
+        private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel3;
     }
 }

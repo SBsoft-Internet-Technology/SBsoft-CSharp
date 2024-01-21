@@ -15,10 +15,11 @@ using System.Windows.Forms;
 namespace NoteChat_Client
 {
     public partial class MainForm : Form
-    {
+    {   
         public MainForm()
         {
             InitializeComponent();
+            toolTip1.SetToolTip(SendMessageRTxt, "消息不能为空");
         }
         private TcpClientThread tcpClientThread;
         private void MainForm_Load(object sender, EventArgs e)
@@ -31,12 +32,35 @@ namespace NoteChat_Client
             receiveThread.Start();
             tcpClientThread.SendMessage("Auth:" + GV.UserName);
             tcpClientThread.FetchOnlineList();
+            this.Text = "NoteChat-2.0 | " + GV.UserName;
+            toolStripStatusLabel3.Text = "On the " + GV.ServerIP + ":" + GV.ServerPort.ToString();
+            Thread Timethread = new Thread(SetTimeLabel);
+            Timethread.Start();
+
         }
 
+        private void SetTimeLabel()
+        {
+            DateTime time;
+            while(true)
+            {
+                time = DateTime.Now;
+                toolStripStatusLabel1.Text = "当前时间：" + time.GetDateTimeFormats('f')[0].ToString() + ":" + time.Second.ToString();
+            }
+            
+        }
         private void SendMessageBtn_Click(object sender, EventArgs e)
         {
-            tcpClientThread.SendMessage(SendMessageRTxt.Text);
-            SendMessageRTxt.Clear();
+            if(SendMessageRTxt.Text != string.Empty)
+            {
+                tcpClientThread.SendMessage(SendMessageRTxt.Text);
+                SendMessageRTxt.Clear();
+            }
+            else
+            {
+                toolTip1.Show("消息不能为空", SendMessageRTxt, 0, -20, 2000);
+            }
+            
         }
         private void ReceiveMessages()
         {
@@ -57,8 +81,19 @@ namespace NoteChat_Client
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            tcpClientThread.Disconnect();
-            Environment.Exit(0);
+            DialogResult aaa = TipHelper.ShowQuestion("您真的要退出吗？", MessageBoxButtons.YesNo);
+            if (aaa == DialogResult.Yes)
+            {
+                e.Cancel = false;
+               
+                tcpClientThread.Disconnect();
+                Environment.Exit(0);
+            }
+            else
+            {
+                e.Cancel = true;
+            }
+            
         }
 
         private void RefreshListBox_Click(object sender, EventArgs e)
@@ -66,17 +101,26 @@ namespace NoteChat_Client
             tcpClientThread.FetchOnlineList();
         }
 
-        private void SendMessageRTxt_KeyPress(object sender, KeyPressEventArgs e)
+        private void SendMessageRTxt_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter && SendMessageRTxt.Text != string.Empty) {
+                tcpClientThread.SendMessage(SendMessageRTxt.Text);
+                SendMessageRTxt.Clear();
+            }
+            else if(e.KeyCode == Keys.Enter){
+                toolTip1.Show("消息不能为空", SendMessageRTxt, 0, -20, 2000);
+            }
+        }
+
+        private void MainForm_Shown(object sender, EventArgs e)
         {
             
         }
 
-        private void SendMessageRTxt_KeyDown(object sender, KeyEventArgs e)
+        private void MenuBtn_Click(object sender, EventArgs e)
         {
-            if (e.KeyCode == Keys.Enter) {
-                tcpClientThread.SendMessage(SendMessageRTxt.Text);
-                SendMessageRTxt.Clear();
-            }
+            Menu menu = new Menu();
+            menu.ShowDialog();
         }
     }
 
@@ -106,30 +150,40 @@ namespace NoteChat_Client
         {
             try
             {
-                // 发送Command:onlinelist命令
-                byte[] data = Encoding.UTF8.GetBytes("Command:onlinelist");
-                stream.Write(data, 0, data.Length);
-
-                // 异步执行接收在线列表
-                string onlineListMessage = await Task.Run(() => ReceiveMessage());
-                if (onlineListMessage.StartsWith("List:"))
+                await Task.Run(() =>
                 {
-                    // 解析在线列表并添加到OnlineListBox中
-                    string[] onlineUsers = onlineListMessage.Substring("List:".Length).Trim('[').Trim(']').Split(',');
+                    // 发送Command:onlinelist命令
+                    byte[] data = Encoding.UTF8.GetBytes("Command:onlinelist");
+                    stream.Write(data, 0, data.Length);
 
-                    // 在 UI 线程上执行 ListBox 操作
-                    onlineListBox.Invoke(new MethodInvoker(() =>
+                    // 异步执行接收在线列表
+                    string onlineListMessage = ReceiveMessage();
+                    if (onlineListMessage.StartsWith("List:"))
                     {
-                        onlineListBox.Items.Clear();
-                        onlineListBox.Items.AddRange(onlineUsers);
-                    }));
-                }
+                        // 解析在线列表并添加到OnlineListBox中
+                        string[] onlineUsers = onlineListMessage.Substring("List:".Length)
+                            .Replace("'", "")  // 去掉单引号
+                            .Replace("[", "")   // 去掉左方括号
+                            .Replace("]", "")   // 去掉右方括号
+                            .Split(',');
+
+                        // 在 UI 线程上执行 ListBox 操作
+                        onlineListBox.Invoke(new MethodInvoker(() =>
+                        {
+                            onlineListBox.Items.Clear();
+                            onlineListBox.Items.AddRange(onlineUsers);
+                        }));
+                    }
+                });
             }
             catch (Exception ex)
             {
                 TipHelper.ShowError($"Error fetching online list: {ex.Message}");
             }
         }
+
+
+
 
         public void Connect()
         {
@@ -182,7 +236,7 @@ namespace NoteChat_Client
             }
         }
 
-        
+
 
         private void AppendMessageToRichTextBox(string message)
         {
@@ -192,17 +246,18 @@ namespace NoteChat_Client
             }
             else
             {
-                
-
-                
-
                 // 格式化消息并添加到 RichTextBox
                 string formattedMessage = $"[{DateTime.Now.ToString("HH:mm:ss")}] {message}";
                 messageRtxt.AppendText(formattedMessage + Environment.NewLine);
+
+                // 将滚动条滑动到最下面
+                messageRtxt.SelectionStart = messageRtxt.Text.Length;
+                messageRtxt.ScrollToCaret();
             }
         }
 
-        
+
+
 
         public void SendMessage(string message)
         {

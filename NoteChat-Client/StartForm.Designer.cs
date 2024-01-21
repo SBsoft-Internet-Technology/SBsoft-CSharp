@@ -91,7 +91,7 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(245, 46);
             this.label3.TabIndex = 6;
-            this.label3.Text = "NoteChat-1.0";
+            this.label3.Text = "NoteChat-2.0";
             // 
             // label4
             // 
@@ -196,6 +196,7 @@
             this.Name = "StartForm";
             this.Text = "连接到服务器";
             this.Load += new System.EventHandler(this.StartForm_Load);
+            this.Shown += new System.EventHandler(this.StartForm_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
