@@ -1,0 +1,65 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34221.43
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PayClient", "PayClient\PayClient.csproj", "{693C10A3-682E-4864-BBDC-AF48AF8B1F52}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PayServer", "PayServer\PayServer.csproj", "{7401D652-FE7C-4C68-A5EA-8514E87E4CD2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NoteChat", "NoteChat", "{95BA7A86-D95F-451A-90B8-9233A35E8B9C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Store", "Store", "{34D4AB14-F0DF-4204-9D88-6A35025E4493}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NoteChat-Server", "NoteChat-Server\NoteChat-Server.csproj", "{951878ED-71EB-4A32-AA50-49B13C0B187B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NoteChat-Client", "NoteChat-Client\NoteChat-Client.csproj", "{2156FCFE-C6B2-48EF-8482-C3E5EC315B41}"
+EndProject
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "NoteChat-Server-PY", "NoteChat-Server-PY\NoteChat-Server-PY.pyproj", "{28039031-7741-4867-A1CB-EDCC6A55FAEC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp1", "ConsoleApp1\ConsoleApp1.csproj", "{45071968-2D0B-4364-AE94-6CA868E7B0E7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{693C10A3-682E-4864-BBDC-AF48AF8B1F52}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{693C10A3-682E-4864-BBDC-AF48AF8B1F52}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{693C10A3-682E-4864-BBDC-AF48AF8B1F52}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{693C10A3-682E-4864-BBDC-AF48AF8B1F52}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7401D652-FE7C-4C68-A5EA-8514E87E4CD2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7401D652-FE7C-4C68-A5EA-8514E87E4CD2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7401D652-FE7C-4C68-A5EA-8514E87E4CD2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7401D652-FE7C-4C68-A5EA-8514E87E4CD2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{951878ED-71EB-4A32-AA50-49B13C0B187B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{951878ED-71EB-4A32-AA50-49B13C0B187B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{951878ED-71EB-4A32-AA50-49B13C0B187B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{951878ED-71EB-4A32-AA50-49B13C0B187B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2156FCFE-C6B2-48EF-8482-C3E5EC315B41}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2156FCFE-C6B2-48EF-8482-C3E5EC315B41}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2156FCFE-C6B2-48EF-8482-C3E5EC315B41}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2156FCFE-C6B2-48EF-8482-C3E5EC315B41}.Release|Any CPU.Build.0 = Release|Any CPU
+		{28039031-7741-4867-A1CB-EDCC6A55FAEC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{28039031-7741-4867-A1CB-EDCC6A55FAEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{45071968-2D0B-4364-AE94-6CA868E7B0E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{45071968-2D0B-4364-AE94-6CA868E7B0E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{45071968-2D0B-4364-AE94-6CA868E7B0E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{45071968-2D0B-4364-AE94-6CA868E7B0E7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{693C10A3-682E-4864-BBDC-AF48AF8B1F52} = {34D4AB14-F0DF-4204-9D88-6A35025E4493}
+		{7401D652-FE7C-4C68-A5EA-8514E87E4CD2} = {34D4AB14-F0DF-4204-9D88-6A35025E4493}
+		{951878ED-71EB-4A32-AA50-49B13C0B187B} = {95BA7A86-D95F-451A-90B8-9233A35E8B9C}
+		{2156FCFE-C6B2-48EF-8482-C3E5EC315B41} = {95BA7A86-D95F-451A-90B8-9233A35E8B9C}
+		{28039031-7741-4867-A1CB-EDCC6A55FAEC} = {95BA7A86-D95F-451A-90B8-9233A35E8B9C}
+		{45071968-2D0B-4364-AE94-6CA868E7B0E7} = {95BA7A86-D95F-451A-90B8-9233A35E8B9C}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6BB59ABF-8E01-4889-9D35-7C56D0FAA4A9}
+	EndGlobalSection
+EndGlobal
